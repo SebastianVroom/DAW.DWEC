@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+ <html lang="es">
+  <head>
+   <title>
+   </title>
+   <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+   <link rel="stylesheet" media="screen" type="text/css" href="" >
+   <script src=""></script>
+  </head>
+  <body>
+      <script>
+          class Alumno{
+              constructor(name, surname,course){
+                  this.nombre=name
+                  this.apellidos=surname
+                  this.curso=course
+              }
+              imprimeDatos(){
+                  console.log(`El alumno ${this.nombre} ${this.apellidos} pertenece al curso ${this.curso}`)
+              }
+              despertar(segundos){
+                  setTimeout(()=>{
+                      console.log(`Acaba de despertarse ${this.nombre}`)
+                  },segundos * 1000)
+              }
+          }
+          let al1 = new Alumno('Carlos','Moreno','2DAW')
+          al1.imprimeDatos()
+          let al2 = new Alumno('Pablo','Muñoz','1SMR')
+          al2.imprimeDatos()
+          al2.despertar(2)
+
+          class AlumnoCiclo extends Alumno{
+              constructor(name, surname,course,frikismo){
+                  super(name,surname,course)
+                  this.frikismo = frikismo
+              }
+              getInfo(){
+                  super.imprimeDatos()
+                  console.log(`Y su nivel de frikismo es ${this.frikismo}`)
+              }
+          }
+          al3= new AlumnoCiclo('Pepe','Botella','2DAM',9001)
+          al3.getInfo()
+      </script>
+  </body>
+ </html>

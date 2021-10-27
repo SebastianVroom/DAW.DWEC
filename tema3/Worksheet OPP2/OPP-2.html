@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+ <html lang="es">
+  <head>
+   <title>OOP 2
+   </title>
+   <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+   <link rel="stylesheet" media="screen" type="text/css" href="" >
+   <script src=""></script>
+  </head>
+  <body>
+    <script>
+        class car{
+            constructor(model,milesPerGallon){
+                this.model = model
+                this.milesPerGallon = milesPerGallon
+                this.tank = 0
+                this.odometer = 0
+            }
+            fill(gallons){
+                this.tank += gallons
+            }
+            drive(distance){
+                if (this.tank > 0){
+                    let dist_disp = this.milesPerGallon * this.tank
+                    if (distance <= dist_disp){
+                        this.odometer += distance
+                        this.tank -= (distance/this.milesPerGallon)
+                    }else{
+                        this.odometer += dist_disp
+                        this.tank = 0
+                    }
+                }else{
+                    return `I ran out of fuel at ${self.odometer} miles`
+                }
+            }
+        }
+        c1 = new car('Berlingo',10)
+        c1.fill(30)
+        c1.drive(250)
+        console.log(c1)
+        c1.drive(100)
+        console.log(c1)
+        c1.drive(50)
+        console.log(c1)
+    </script>
+  </body>
+ </html>

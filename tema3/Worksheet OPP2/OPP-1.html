@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+ <html lang="es">
+  <head>
+   <title>OOP 1
+   </title>
+   <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+   <link rel="stylesheet" media="screen" type="text/css" href="" >
+   <script src=""></script>
+  </head>
+  <body>
+    <script>
+        class Persona{
+            constructor(name, age){
+                this.name = name
+                this.age = age
+                this.stomach = []
+            }
+            eat(edible){
+                if (this.stomach.length < 10){
+                    this.stomach.push(edible)
+                }
+            }
+            poop(){
+                this.stomach = []
+            }
+            toString(){
+                return `${this.name}, age ${this.age}`
+            }
+        }
+        p1 = new Persona('Antonio',69)
+        p1.eat('Burger')
+        p1.eat('Cola')
+        console.log(p1.stomach)
+        p1.poop()
+        console.log(p1.stomach)
+        console.log(''+p1)
+    </script>
+  </body>
+ </html>

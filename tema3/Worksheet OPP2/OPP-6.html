@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+ <html lang="es">
+  <head>
+   <title>OOP 6
+   </title>
+   <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+   <link rel="stylesheet" media="screen" type="text/css" href="" >
+   <script src=""></script>
+  </head>
+  <body>
+    <script>
+        class lambdasian{
+            constructor(obj){
+                this.name = obj.name
+                this.age = obj.age
+                this.location = obj.location
+            }
+            speak(){
+                return `Hello my name is ${this.name}, I am from ${this.location}`
+            }
+        }
+        a = new lambdasian({name : 'Paco',age : 34,location : 'Granada'})
+        console.log(a.speak())
+
+        class Instructor extends lambdasian{
+            constructor(obj){
+                super(obj)
+                this.speciality = obj.speciality
+                this.favLanguage = obj.favLanguage
+                this.catchPhrase = obj.catchPhrase
+            }
+            demo(subject){
+                return `Today we are learning about ${subject}`
+            }
+            grade(student,subject){
+                return `${student.name} receices a perfect grade on ${subject}`
+            }
+        }
+        b = new Instructor({name : 'Paco',age : 34,location : 'Granada',speciality : 'redux',favLanguage : 'SQLquery', catchPhrase : 'Mikel Mazuekos'})
+        console.log(b.demo('Bases de Datos'))
+
+        class Student extends lambdasian{
+            constructor(obj){
+                super(obj)
+                this.previousBackground = obj.previousBackground
+                this.className = obj.className
+                this.favSubjects = obj.favSubjects
+            }
+            listSubjects(){
+                return "loving " + this.favSubjects.join(', ') + '!'
+            }
+            PRAssigment(subject){
+                return `${this.name} has submittted a PR for ${subject}`
+            }
+            sprintChallenge(subject){
+                return `${this.name} has begun sprint challenge on ${subject}`
+            }
+        }
+
+        class ProjectManager extends Instructor{
+            constructor(obj){
+                super(obj)
+                this.gradClassName = obj.gradClassName
+                this.favInstructor = obj.favInstructor
+            }
+            standup(channel){
+                return `${this.name} announces to ${channel}, @channel standy times`
+            }
+            debugsCode(student,subject){
+                return `${name} debugs ${student.name}'s code on ${subject}`
+            }
+        }
+    </script>
+  </body>
+ </html>

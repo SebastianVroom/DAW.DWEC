@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+ <html lang="es">
+  <head>
+   <title>OOP 3
+   </title>
+   <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+   <link rel="stylesheet" media="screen" type="text/css" href="" >
+   <script src=""></script>
+  </head>
+  <body>
+    <script>
+        class lambdasian{
+            constructor(obj){
+                this.name = obj.name
+                this.age = obj.age
+                this.location = obj.location
+            }
+            speak(){
+                return `Hello my name is ${this.name}, I am from ${this.location}`
+            }
+        }
+        a = new lambdasian({name : 'Paco',age : 34,location : 'Granada'})
+        console.log(a.speak())
+    </script>
+  </body>
+ </html>
