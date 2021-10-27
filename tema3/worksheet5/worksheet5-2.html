@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+ <html lang="es">
+  <head>
+   <title>OOP 3
+   </title>
+   <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+   <link rel="stylesheet" media="screen" type="text/css" href="" >
+   <script src=""></script>
+  </head>
+  <body>
+    <script>
+        class BookList{
+            constructor(){
+                this.bookArr = []
+                this.bookReadArr = []
+                this.bookUnreadArr = []
+                this.currBook = undefined
+                this.lastBook = undefined
+                this.nextBook = undefined
+            }
+            add(book){
+                this.bookArr.push(book)
+                if (book.read){
+                    this.bookReadArr.push(book)
+                }else{
+                    this.bookUnreadArr.push(book)
+                }
+            }
+            finishCurrentBook(){
+                this.currBook.read = true
+                this.currBook.readdate = new Date(Date.now())
+                this.bookUnreadArr.splice(this.bookUnreadArr.indexOf(this.currBook),1)
+                this.bookReadArr.push(this.currBook)
+                this.lastBook = this.currBook
+                this.currBook = this.nextBook
+                this.nextBook = this.bookUnreadArr[0]
+            }
+            sortbooks(){
+                this.bookReadArr = []
+                this.bookUnreadArr = []
+                for(b of this.bookArr){
+                    if (b.read){
+                        this.bookReadArr.push(b)
+                    }else{
+                        this.bookUnreadArr.push(b)
+                    }
+                }
+            }
+        }
+
+        class Book{
+            constructor(title,genre,author,read = false,readdate = undefined){
+                this.title = title
+                this.genre = genre
+                this.author = author
+                this.read = read
+                this.readdate = readdate
+            }
+        }
+    </script>
+  </body>
+ </html>
