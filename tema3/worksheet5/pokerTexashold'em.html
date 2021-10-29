@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="es">
+ <head>
+  <title>
+  </title>
+  <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+  <link rel="stylesheet" media="screen" type="text/css" href="" >
+ </head>
+ <body>
+  <script>
+
+class Carta{
+    constructor(palo, numero){
+        this.palo = palo
+        this.numero = numero
+        this.figura = (this.numero == 1)?'AS':(this.numero == 11)?'JOTA':(this.numero == 12)?'REINA':(this.numero == 13)?'REY':undefined
+    }
+    toString(){
+        let fig = (this.figura === undefined)?this.numero:this.figura
+        return `${fig} de ${this.palo}`
+    }
+}
+
+class Baraja{
+    constructor(){
+        this.cartas = []
+        for (let p of ['Picas','Corazones','Diamantes','Trevoles']){
+            for(let n = 1;n <= 13;n++){
+                this.cartas.push(new Carta(p,n))
+            }
+        }
+        this.descarte = []
+    }
+    barajear(){
+        let poss = []
+        for (let i = 0;i < this.cartas.length;i++){
+            poss.push(i)
+        }
+        let resul = []
+        while (poss.length > 0){
+            let obj = poss[Math.floor(Math.random() * poss.length)]
+            resul.push(this.cartas[obj])
+            poss.splice(poss.indexOf(obj),1)
+        }
+        this.cartas = resul
+    }
+    sacar(){
+        let carta = this.cartas.shift()
+        this.descarte.push(carta)
+        return carta
+    }
+    rehacer(){
+        this.cartas.splice(0,0,...this.descarte)
+    }
+}
+
+class Jugador{
+    constructor(juego,bote){
+        this.mano = []
+        this.juego = juego
+        this.bote = bote
+    }
+}
+
+class Juego{
+    constructor(num_jug){
+        this.baraja = new Baraja()
+        this.jugadores = []
+        for(let i = 0;i < num_jug;i++){
+            this.jugadores.push(new Jugador(this,20))
+        }
+        this.mesa = []
+        this.bote = Array(num_jug)
+    }
+    limpiarBote(num_jug = -1){
+        if(num_jug >= 0){
+            boteTotal = this.bote.reduce((acc,val)=>acc += val,0)
+            this.jugadores[num_jug].bote += boteTotal
+        }
+        for(p of this.bote){
+                p = 0
+        }
+    }
+}
+a = new Baraja()
+a.barajear()
+document.write(a.sacar())
+</script>
+ </body>
+</html>
