@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+ <html lang="es">
+  <head>
+   <title>Worksheet 2-5
+   </title>
+   <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+   <link rel="stylesheet" media="screen" type="text/css" href="" >
+   <script src=""></script>
+  </head>
+  <body>
+    <script>
+        function paresImpares(){
+            resul = Array()
+            for (let i=0;i<100;i++){
+                resul.push(Math.floor((Math.random()* 1000) + 1))
+            }
+            for(let n of resul){
+                document.write(n,"<br>")
+            }
+            resul.sort((val1,val2)=>(val1 % 2) - (val2 % 2))
+            document.write("<hr>")
+            for(let n of resul){
+                document.write(n,"<br>")
+            }
+        }
+        paresImpares()
+    </script>
+  </body>
+ </html>

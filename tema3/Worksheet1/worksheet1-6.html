@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+ <html lang="es">
+  <head>
+   <title>Worksheet 1-6
+   </title>
+   <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+   <link rel="stylesheet" media="screen" type="text/css" href="" >
+   <script src=""></script>
+  </head>
+  <body>
+      <p></p>
+      <script>
+          function poten_recur(num, base){
+              if (base <= 1){
+                  return num
+              }else{
+                  return poten_recur(num,base - 1) * num
+              }
+          }
+          document.write(poten_recur(4,3),"<br>",poten_recur(5,2),"<br>",poten_recur(6,5),"<br>")
+      </script>
+  </body>
+ </html>

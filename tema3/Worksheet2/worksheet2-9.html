@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+ <html lang="es">
+  <head>
+   <title>Worksheet2-9
+   </title>
+   <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+   <link rel="stylesheet" media="screen" type="text/css" href="" >
+   <script src=""></script>
+   <style>table{border: 1px solid black} td {border: 1px solid black}</style>
+  </head>
+  <body>
+    <script>
+        function dados(){
+            resul = Array(
+                Array(0,0,0,0,0,0),
+                Array(0,0,0,0,0,0),
+                Array(0,0,0,0,0,0),
+                Array(0,0,0,0,0,0),
+                Array(0,0,0,0,0,0),
+                Array(0,0,0,0,0,0)
+            )
+            for (let i = 0;i<3600;i++){
+                let tir1 = (Math.floor(Math.random() * 6 + 1))
+                let tir2 = (Math.floor(Math.random() * 6 + 1))
+                resul[tir1 - 1][tir2 - 1] += 1
+            }
+            return resul
+        }
+        prob = dados()
+        document.write('<table><tr><td>Tiradas</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>')
+        for (let i = 0;i < prob.length; i++){
+            document.write(`<tr><td>${i + 1}</td>`)
+            for (val of prob[i]){
+                document.write(`<td>${val}</td>`)
+            }
+            document.write("</tr>")
+        }
+        document.write("</table>")
+    </script>
+  </body>
+ </html>

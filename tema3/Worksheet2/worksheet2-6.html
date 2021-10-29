@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+ <html lang="es">
+  <head>
+   <title>Worksheet2-6
+   </title>
+   <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+   <link rel="stylesheet" media="screen" type="text/css" href="" >
+   <script src=""></script>
+  </head>
+  <body>
+    <script>
+        function calcPaga(...emp_vent){
+            sueldos = emp_vent.map((val)=>(val*0.09)+ 200)
+            return sueldos.map((val)=>(Math.ceil(val * 100))/100)
+        }
+    </script>
+  </body>
+ </html>

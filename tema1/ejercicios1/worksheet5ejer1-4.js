@@ -1,0 +1,5 @@
+var edad = prompt('Deme su edad')
+var nombre = prompt('Deme su nombre')
+var apell = prompt('Deme su apellidos')
+var ciclo = prompt('Deme el nombre de su ciclo')
+alert(`Nombre: ${nombre}\nEdad: ${edad}\nApellidos: ${apell}\nCiclo: ${ciclo}`)

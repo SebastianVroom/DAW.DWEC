@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+ <html lang="es">
+  <head>
+   <title>Worksheet 3-5
+   </title>
+   <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+   <link rel="stylesheet" media="screen" type="text/css" href="" >
+   <script src=""></script>
+   <style>table{border: 1px solid black} td {border: 1px solid black}</style>
+  </head>
+  <body>
+    <script>        
+        function columna(matriz,coor){
+            resul = []
+            for(f of matriz){
+                resul.push(f[coor])
+            }
+            return resul
+        }
+
+        function buscaSillin(matriz){
+            let resul = []
+            for(let i = 0;i < matriz.length;i++){
+                let f_max=Math.max(...matriz[i])
+                let n_max = 0
+                for(let n of matriz[i]){
+                    if (n == f_max){
+                        n_max ++
+                    }
+                }
+                let pos = 0
+                while (n_max > 0){
+                    pos = matriz[i].indexOf(f_max,pos)
+                    let colum = columna(matriz,pos)
+                    if (Math.min(...colum)==f_max){
+                        resul.push([i + 1, pos + 1])
+                    }
+                    pos ++
+                    n_max --
+                }
+            }
+            if (resul.length > 0){
+                for(s of resul){
+                    document.write("[",s,"]")
+                }
+            }else{
+                document.write("No saddle points")
+            }
+            
+        }
+        mat = [
+            [3,4,4],
+            [1,3,3],
+            [1,3,3]
+        ]
+        buscaSillin(mat)
+    </script>
+  </body>
+ </html>

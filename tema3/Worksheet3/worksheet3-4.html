@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+ <html lang="es">
+  <head>
+   <title>Worksheet 3-4
+   </title>
+   <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+   <link rel="stylesheet" media="screen" type="text/css" href="" >
+   <script src=""></script>
+   <style>table{border: 1px solid black} td {border: 1px solid black}</style>
+  </head>
+  <body>
+    <script>
+        function randint(x,y){
+             return Math.floor(Math.random() * y  + x)
+        }
+
+        function convCoor(val){
+            resul = []
+            resul.push(Math.floor(val / 10))
+            resul.push(val%10)
+            return resul
+        }
+
+        function generaTesoro(x = 5,y = 5){
+            let resul = Array()
+            for(let i = 0;i<x;i++){
+                resul.push(Array(y))
+            }
+            let coors = []
+            for (let i = 1;i<=x;i++){
+                for (let j=1;j<=y;j++){
+                    coors.push(i * 10 + j)
+                }
+            }
+            coors.shift()
+            let prev = coors[randint(0,coors.length)]
+            let pos = convCoor(prev)
+            resul[pos[0] - 1][pos[1] - 1] = prev
+            coors.splice(coors.indexOf(prev),1)
+            while (coors.length > 0){
+                let actual = coors[randint(0,coors.length)]
+                pos = convCoor(actual)
+                resul[pos[0] - 1][pos[1] - 1] = prev
+                prev = actual
+                coors.splice(coors.indexOf(prev),1)
+            }
+            resul[0][0]=prev
+            return resul
+        }
+        tesoro = generaTesoro()
+        for(f of tesoro){
+            document.write(f,"<br>")
+        }
+
+        function buscaTesoro(tesoro,fil = 1,col = 1){
+            let coorfil = Math.floor(tesoro[fil - 1][col - 1] / 10)
+            let coorcol = tesoro[fil - 1][col - 1] % 10
+            let resul = []
+            if (coorfil == fil && coorcol == col){
+                return []
+            }
+            else{
+                resul.unshift([coorfil,coorcol],...buscaTesoro(tesoro,coorfil,coorcol))
+            }
+            return resul
+        }
+        mapa = buscaTesoro(tesoro)
+        for (p of mapa){
+            document.write(`[${p}]`)
+        }
+
+
+    </script>
+  </body>
+ </html>

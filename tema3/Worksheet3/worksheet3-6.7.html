@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+ <html lang="es">
+  <head>
+   <title>Worksheet 3-5
+   </title>
+   <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+   <link rel="stylesheet" media="screen" type="text/css" href="" >
+   <script src=""></script>
+   <style>table{border: 1px solid black} td {border: 1px solid black}</style>
+  </head>
+  <body>
+    <script>
+        function codificador(cadena){
+            cadena = cadena.replaceAll(' ','')
+            let tam = cadena.length
+            let anc = Math.floor(Math.sqrt(tam))
+            let matriz = []
+            for (let i = 0;i<tam;i+=anc){
+                matriz.push(cadena.slice(i,i + anc))
+            }
+            let resul = ''
+            for(let i = 0;i<anc;i++){
+                if (i < tam % anc || tam % anc == 0){
+                    for(let j = 0;j < matriz.length;j++){
+                        resul += matriz[j][i]
+                    }
+                }else{
+                    for(let j = 0;j < matriz.length - 1;j++){
+                        resul += matriz[j][i]
+                    }
+                }
+            }
+            return resul
+        }
+
+        function codificadorRevis(cadena){
+            cadena = cadena.replaceAll(' ','')
+            let tam = cadena.length
+            let anc = Math.round(Math.sqrt(tam))
+            let offs = tam - (anc ** 2)
+            let matriz = []
+            for (let i = 0;i<tam;i+=anc){
+                matriz.push(cadena.slice(i,i + anc))
+            }
+            let resul = ''
+            for(let i = 0;i < anc;i++){
+                if (offs > 0){
+                    for(let j = 0;j < ((i < offs)?anc + 1:anc);j++){
+                        resul += matriz[j][i]
+                    }
+                }else if(offs == 0){
+                    for(let j = 0;j < anc;j++){
+                        resul += matriz[j][i]
+                    }
+                }else{
+                    for(let j = 0;j < ((i < anc + offs)?anc:anc - 1);j++){
+                        resul += matriz[j][i]
+                    }
+                }
+            }
+            return resul
+        }
+
+        function decodificadorRevis(cadena){
+            let tam = cadena.length
+            let anc = Math.round(Math.sqrt(tam))
+            let offs = tam - (anc ** 2)
+            let matriz = []
+            let i = 0
+            while (i < tam){
+                let cort = i + anc + (offs >= 0?(matriz.length < offs?1:0):(matriz.length < anc + offs?0:-1))
+                matriz.push(cadena.slice(i,cort))
+                i = cort 
+            }
+            let resul = ''
+            if (offs >= 0){
+                for(let i = 0; i<matriz.length;i++){
+                    for (let j = 0;j < anc;j++){
+                        resul += matriz[j][i]
+                    }
+                }
+                if (offs > 0){
+                    for(let i = 0;i < offs;i++){
+                        resul += matriz[i][anc]
+                    }
+                }
+            }else{
+                for(let i = 0; i<matriz.length - 1;i++){
+                    for (let j = 0;j < anc;j++){
+                        resul += matriz[j][i]
+                    }
+                }
+                for(let i = 0;i < anc + offs;i++){
+                    resul += matriz[i][anc - 1]
+                }
+            }
+            return resul
+        }
+
+        document.write(codificadorRevis('Hola don Jose,Hola don Pepito'),"<br>")
+        document.write(codificadorRevis('have a nice day'),"<br>",codificadorRevis('feed the dog'),"<br>",codificadorRevis('chill out'),"<br>")
+        document.write(decodificadorRevis(codificadorRevis('Hola don Jose,Hola don Pepito')),"<br>")
+        document.write(decodificadorRevis(codificadorRevis('have a nice day')),"<br>",decodificadorRevis(codificadorRevis('feed the dog')),"<br>",decodificadorRevis(codificadorRevis('chill out')),)
+    </script>
+  </body>
+ </html>
