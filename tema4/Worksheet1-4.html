@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+ <html lang="es">
+  <head>
+   <title>Worksheet 1-4
+   </title>
+   <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+   <link rel="stylesheet" media="screen" type="text/css" href="" >
+   <script src=""></script>
+   <style>table {border: 1px solid black;} td {border: 1px solid black;margin: 0px;}</style>
+  </head>
+  <body>
+    <script>
+        document.write('<table>')
+            for (let i = 0;i < 100;i++){
+                document.write('<tr>')
+                for (let j = 0;j < 100;j++){
+                    document.write('<td>&#160</td>')
+                }
+                document.write('</tr>')
+            }
+        document.write('</table>')
+        celdas = document.querySelectorAll('td')
+        colselec = 'black'
+        for(c of celdas){
+            c.addEventListener('mouseenter',(e)=>e.target.style.backgroundcolor = colselec)
+        }
+    </script>
+  </body>
+ </html>
