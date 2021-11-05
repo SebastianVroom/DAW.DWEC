@@ -19,11 +19,16 @@
                 document.write('</tr>')
             }
         document.write('</table>')
-        celdas = document.querySelectorAll('td')
-        colselec = 'black'
-        for(c of celdas){
-            c.addEventListener('mouseenter',(e)=>e.target.style.backgroundcolor = colselec)
-        }
+        document.querySelectorAll('td').forEach(item => {
+  item.addEventListener('mouseover', event => {
+      if(event.shiftKey){
+    event.target.style.backgroundColor = 'red'}    
+    else if (event.altKey){
+        event.target.style.backgroundColor = 'blue'
+    }
+  })
+})
+        const colselec = 'red'
     </script>
   </body>
  </html>
