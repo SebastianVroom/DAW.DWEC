@@ -31,8 +31,13 @@
             document.getElementById('prevb').addEventListener('click',()=>cambimg(-1))
             document.getElementById('nextb').addEventListener('click',()=>cambimg(+1))
             var hammertouch = new Hammer(document.getElementById('touchpad'))
-            hammertouch.on('panright',function(){cambimg(+1)})
-            hammertouch.on('panleft',function(){cambimg(-1)})
+            /*hammertouch.on('swiperigth',function(e){if(e.isFinal){cambimg(+1)}})
+            hammertouch.on('swipeleft',function(e){if(e.isFinal){cambimg(-1)}})*/
+            var hammertouch = new Hammer.Manager(document.getElementById('touchpad'))
+            hammertouch.add(new Hammer.Swipe({event:'swiper',direction:Hammer.DIRECTION_RIGHT,threshold:100}))
+            hammertouch.add(new Hammer.Swipe({event:'swipel',direction:Hammer.DIRECTION_LEFT,threshold:100}))
+            hammertouch.on('swipel',function(e){cambimg(-1)})
+            hammertouch.on('swiper',function(){cambimg(+1)})
         </script>
     </body>
 </html>

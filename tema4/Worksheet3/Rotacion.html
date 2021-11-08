@@ -1,0 +1,22 @@
+  <!DOCTYPE html>
+  <html lang="es">
+      <head>
+          <title>
+          </title>
+          <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+          <link rel="stylesheet" media="screen" type="text/css" href="" >
+      </head>
+      <body>
+          <p id='doeSupported'>Not Supported</p>
+          <img></img>
+        <script>
+            function Manejaangulos(e){
+                console.log[e.alpha,e.beta,e.gamma]
+            }
+        if (window.DeviceOrientationEvent) {
+            window.addEventListener('deviceorientation', Manejaangulos,false);
+            document.getElementById("doeSupported").innerText = "Supported!";
+          }</script>
+
+      </body>
+  </html>
