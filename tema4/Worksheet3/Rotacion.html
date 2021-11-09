@@ -7,16 +7,15 @@
           <link rel="stylesheet" media="screen" type="text/css" href="" >
       </head>
       <body>
-          <p id='doeSupported'>Not Supported</p>
-          <img></img>
+        <img id='rota' src="dados/dado1.jpeg">
         <script>
-            function Manejaangulos(e){
-                console.log[e.alpha,e.beta,e.gamma]
+            window.addEventListener('deviceorientation', handleOrientation);
+
+            function handleOrientation(e){
+              console.log(e.alpha)
+              document.getElementById('rota').style.transform='rotate(' + e.alpha +'deg) skewY(' + e.beta +'deg) skewX(' + e.gamma +'deg)'
             }
-        if (window.DeviceOrientationEvent) {
-            window.addEventListener('deviceorientation', Manejaangulos,false);
-            document.getElementById("doeSupported").innerText = "Supported!";
-          }</script>
+        </script>
 
       </body>
   </html>

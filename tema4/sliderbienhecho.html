@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Slider
+        </title>
+        <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+        <link rel="stylesheet" media="screen" type="text/css" href="" >
+        <style>
+            .img{
+                width: 600px;
+                height: 600px;
+                background-image: url('Worksheet3/dados/dado1.jpeg');
+                background-size: contain;
+            }
+            .boton{
+                color: white;
+                background: rgba(0, 0, 0, 0.4) ;
+                width: 30px;
+                height: 30px;
+                margin: 50% 0 0 0;
+            }
+            .iza{
+                float: left;
+            }
+            .der{
+                float: right;
+            }
+            .contador{
+                float: right;
+            }
+            .marcas{
+                position: relative;
+                bottom: 0px;
+                top: 300px
+            }
+        </style>
+    </head>
+    <body>
+        <div id=img class='img'><div id='contador'class="contador"><p>1/6</p></div>
+        <button id='bi' class='boton izq'><=</button><button id='bd' class='boton der'>=></button>
+        <div class=marcas>asdf</div></div>
+        <script>
+            numdad = 1
+            function cambimg(camb){
+                if (camb > 0){
+                    if (numdad + camb <= 6){
+                        numdad += camb
+                        document.getElementById('img').style.backgroundImage="url('Worksheet3/dados/dado"+numdad+".jpeg')"
+                        document.getElementById('contador').innerHTML="<p>"+numdad+"/6</p>"
+                    }
+                }else if(camb < 0){
+                    if (numdad + camb >= 1){
+                        numdad += camb
+                        document.getElementById('img').style.backgroundImage="url('Worksheet3/dados/dado"+numdad+".jpeg')"
+                        document.getElementById('contador').innerHTML="<p>"+numdad+"/6</p>"
+                    }
+                }
+            }
+            document.getElementById('bi').addEventListener('click',()=>cambimg(-1))
+            document.getElementById('bd').addEventListener('click',()=>cambimg(+1))
+        </script>
+    </body>
+</html>
