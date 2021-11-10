@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>
+        </title>
+        <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+        <link rel="stylesheet" media="screen" type="text/css" href="" >
+        <script src=""></script>
+    </head>
+    <body>
+        <img id='dado'src="Worksheet3/dados/dado1.jpeg">
+        <p id='cartel'>Vuelve con algo que puedas agitar</p>
+    </body>
+    <script>
+        function dados(e){
+            if (e.aceleration.some((n)=>n > 5)){
+                let dado = Math.floor((Math.random * 6) + 1)
+                document.getElementById('dado').src=`Worksheet3/dados/dado${dado}.jpeg`
+            }
+        }
+        if (window.DeviceMotionEvent) {
+  window.addEventListener('devicemotion', dados);
+  document.getElementById('cartel').innerHTML='Agita esos dados'
+}
+/*Ejemplo de Jose
+window.addEventListener('devicemotion',trataaceleracion)
+
+function trataaceleracion(e){
+    if (e.acceleration[0]!=0){
+        pasarDchea()
+    }
+}
+*/
+
+    </script>
+</html>

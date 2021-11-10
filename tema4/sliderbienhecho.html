@@ -5,6 +5,7 @@
         </title>
         <meta charset="UTF-8" http-equiv="content-type" content="text/html">
         <link rel="stylesheet" media="screen" type="text/css" href="" >
+        <script src = 'https://hammerjs.github.io/dist/hammer.js'></script>
         <style>
             .img{
                 position:relative;
@@ -18,7 +19,7 @@
                 background: rgba(0, 0, 0, 0.4) ;
                 width: 30px;
                 height: 30px;
-                margin: 50% 0 0 0;
+                margin: 45% 0 0 0;
             }
             .iza{
                 float: left;
@@ -67,9 +68,9 @@
         <script>
             numdad = 1
             function ajusteimg(num){
-                document.getElementById('img').style.backgroundImage="url('Worksheet3/dados/dado"+numdad+".jpeg')"
-                document.getElementById('contador').innerHTML="<p>"+numdad+"/6</p>"
-                document.getElementById('b'+numdad).style.backgroundColor ='black'
+                document.getElementById('img').style.backgroundImage="url('Worksheet3/dados/dado"+num+".jpeg')"
+                document.getElementById('contador').innerHTML="<p>"+num+"/6</p>"
+                document.getElementById('b'+num).style.backgroundColor ='black'
             }
             function cambimg(camb){
                 if (camb > 0){
@@ -88,6 +89,11 @@
             }
             document.getElementById('bi').addEventListener('click',()=>cambimg(-1))
             document.getElementById('bd').addEventListener('click',()=>cambimg(+1))
+            var hammertouch = new Hammer.Manager(document.getElementById('img'))
+            hammertouch.add(new Hammer.Swipe({event:'swiper',direction:Hammer.DIRECTION_RIGHT}))
+            hammertouch.add(new Hammer.Swipe({event:'swipel',direction:Hammer.DIRECTION_LEFT}))
+            hammertouch.on('swipel',function(){cambimg(-1)})
+            hammertouch.on('swiper',function(){cambimg(+1)})
         </script>
     </body>
 </html>
