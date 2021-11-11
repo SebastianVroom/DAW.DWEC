@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Worksheet 4-1
+        </title>
+        <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+        <link id='csslink' rel="stylesheet" media="screen" type="text/css" href="worksheet4-1a.css" >
+    </head>
+    <body>
+        <div class='princ'>
+            <nav><a href="#" id='stynor'>Tema normal</a><a href='#' id='stymin'>Tema minimalista</a></nav>
+        <h1>pagina de ejemplo</h1>
+            <p>
+                En esta pagina vamos a comprobar lo facil que es explicar estilos mediantes CSS a un documento
+            </p>
+            <p>
+                Lo ideal es que al sellecionar un estilo permanezca siempre igual para el usuario
+            </p>
+            <p class='ahora'>
+                Usando CSS podemos ocultar partes del sitio<br>
+                <span>Este parrafo debe ser solo visible en el tema normal</span>
+            </p>
+            <p class='marco'>
+                Esto esta dentro de un marco
+            </p>
+        </div>
+        <script>
+            document.getElementById('stynor').addEventListener('click',()=>document.getElementById('csslink').href="worksheet4-1a.css")
+            document.getElementById('stymin').addEventListener('click',()=>document.getElementById('csslink').href="worksheet4-1b.css")
+        </script>
+    </body>
+</html>

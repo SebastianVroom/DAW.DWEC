@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Worksheet 4-1
+        </title>
+        <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+        <link id='csslink' rel="stylesheet" media="screen" type="text/css" href="" >
+        <style></style>
+    </head>
+    <body>
+        <div class='princ'>
+            <nav><a href="#" id='stynor'>Tema normal</a><a href='#' id='stymin'>Tema minimalista</a></nav>
+        <h1>pagina de ejemplo</h1>
+            <p>
+                En esta pagina vamos a comprobar lo facil que es explicar estilos mediantes CSS a un documento
+            </p>
+            <p>
+                Lo ideal es que al sellecionar un estilo permanezca siempre igual para el usuario
+            </p>
+            <p class='ahora'>
+                Usando CSS podemos ocultar partes del sitio<br>
+                <span>Este parrafo debe ser solo visible en el tema normal</span>
+            </p>
+            <p class='marco'>
+                Esto esta dentro de un marco
+            </p>
+        </div>
+        <script>
+            function stlnor(){
+                document.getElementsByTagName("STYLE")[0].innerHTML=`html, body{
+    height:100%
+}
+body{
+    margin: 0;
+    background-color: cyan;
+}
+.princ{
+    background-color: lightyellow;
+    padding: 20px 5px 20px 20px;
+    height: 100%;
+    margin-left: 10%;
+}
+nav{
+    background-color: lightblue;
+    border:1px solid black;
+    margin: 0 10px 30px 10px;
+}
+.marco{
+    border: 1px solid black;
+    background-color: yellow;
+}
+span{
+    font-weight:bold;
+}`
+            }
+            function stlmin(){
+                document.getElementsByTagName("STYLE")[0].innerHTML=`.ahora{
+                                                            display: none;
+                                                        }`
+            }
+            document.getElementById('stynor').addEventListener('click',stlnor)
+            document.getElementById('stymin').addEventListener('click',stlmin)
+            window.addEventListener('load',stlnor)
+        </script>
+    </body>
+</html>

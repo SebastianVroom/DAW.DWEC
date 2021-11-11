@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>
+        </title>
+        <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+        <link rel="stylesheet" media="screen" type="text/css" href="" >
+        <script src=""></script>
+        <style>
+        </style>
+    </head>
+    <body>
+        <button id='+'>+</button>
+        <button id='-'>-</button>
+        <button id='r'>reset</button>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam faucibus eu orci at maximus. Etiam metus eros, efficitur in erat vel, congue volutpat enim. Mauris eu ex porttitor, rhoncus urna aliquet, efficitur urna. Mauris vitae enim ligula. Vivamus nec sagittis justo. Etiam porta in nulla in pretium. Nullam auctor et ante quis consectetur. Donec eget nulla at ante accumsan auctor. Vestibulum imperdiet sed nisi a pellentesque.
+        </p>
+        <p>
+            Praesent semper neque felis, a luctus leo suscipit in. Vivamus pellentesque malesuada lectus, eget sagittis nibh iaculis nec. Phasellus mattis, lectus quis auctor convallis, arcu turpis venenatis est, vitae venenatis nisi neque feugiat ligula. In aliquet nisl eget neque scelerisque lacinia. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quis faucibus lacus. Curabitur porta ligula a ipsum dictum, quis blandit magna iaculis. Quisque porta nisl nisi, porttitor suscipit lectus placerat vulputate. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam in mi ut lectus convallis ornare non ac magna. Fusce maximus purus velit, vitae pulvinar est interdum eget. Mauris magna mi, auctor sed tincidunt id, interdum et eros. Nulla facilisi. Nulla imperdiet sapien sem, scelerisque posuere purus iaculis vitae. Duis suscipit dolor urna, at finibus lacus lacinia nec. Donec lectus nisl, hendrerit sit amet dui nec, consectetur accumsan leo.
+        </p>
+        <p>
+            Cras pharetra semper dolor, a rhoncus velit varius ac. In hac habitasse platea dictumst. Curabitur vel nunc quis neque placerat finibus ornare eu enim. Quisque iaculis luctus libero, at maximus felis venenatis et. Nullam egestas ante eu elit vehicula rhoncus. Cras eu maximus sapien. Donec ullamcorper massa ut tellus rutrum, eget posuere nulla imperdiet. Curabitur tincidunt diam id velit tempor bibendum.
+        </p>
+        <p>
+            Donec quis lectus non arcu vehicula molestie vel sit amet odio. Suspendisse eget justo laoreet, consectetur neque eget, commodo sapien. Praesent lorem eros, pretium id lacus at, fringilla congue nisi. Donec fermentum posuere dapibus. Suspendisse laoreet risus sed commodo elementum. Proin venenatis risus sed molestie ultrices. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin sed mauris ut elit faucibus rhoncus. Praesent bibendum lectus ac elit blandit faucibus. Ut at ultrices est. Curabitur condimentum auctor nunc, sit amet molestie lectus consequat id. Quisque nisi nisi, laoreet vitae orci id, bibendum dapibus purus. Morbi sodales nisl sit amet dui elementum feugiat.
+        </p>
+        <script>
+            var size=20
+            window.addEventListener('load',()=>document.getElementsByTagName('STYLE')[0].innerHTML=`p{font-size:${size}px};`)
+            document.getElementById('+').addEventListener('click',()=>{
+                size+=2
+                document.getElementsByTagName('STYLE')[0].innerHTML=`p{font-size:${size}px};`
+            },)
+            document.getElementById('-').addEventListener('click',()=>{
+                size-=2
+                document.getElementsByTagName('STYLE')[0].innerHTML=`p{font-size:${size}px};`
+            },)
+            document.getElementById('r').addEventListener('click',()=>{
+                size=20
+                document.getElementsByTagName('STYLE')[0].innerHTML=`p{font-size:${size}px};`
+            },)
+        </script>
+    </body>
+</html>
