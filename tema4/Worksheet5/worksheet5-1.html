@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>
+        </title>
+        <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+        <link rel="stylesheet" media="screen" type="text/css" href="" >
+        <script src=""></script>
+    </head>
+    <body>
+        <script>
+            function validarMayuscaula(cad){
+                let exp = new RegExp('[A-Z]+')
+                return exp.test(cad)
+            }
+            
+            function validarCaracteresEspecales(cad){
+                exp = new RegExp('[!@#$%^&]+')
+                return exp.test(cad)
+            }
+            
+            function validarCorreo(cad){
+                exp = / ^ ( ( [ \ - \ w ] + ) \ . ? ) + @ ( ( [ \ - \ w ] + ) \ . ? ) + \ . [ a - zA -Z ] { 2 , 4 } $ /
+                return exp.test(cad)
+            }
+            
+            function validarTarjetaCredito(cad){
+                exp = new RegExp('*[A-Z]*')
+                return exp.test(cad)
+            }
+           
+            function validarLongitud(cad){
+                exp = new RegExp('*[A-Z]*')
+                return exp.test(cad)
+            }
+            
+            function validarNumero(cad){
+                exp = new RegExp('*[A-Z]+*')
+                return exp.test(cad)
+            }
+        </script>
+    </body>
+</html>
