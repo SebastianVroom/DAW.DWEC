@@ -20,22 +20,22 @@
             }
             
             function validarCorreo(cad){
-                exp = / ^ ( ( [ \ - \ w ] + ) \ . ? ) + @ ( ( [ \ - \ w ] + ) \ . ? ) + \ . [ a - zA -Z ] { 2 , 4 } $ /
+                exp = /^[\w.]+@[\w]+\.[\w]+$/
                 return exp.test(cad)
             }
             
             function validarTarjetaCredito(cad){
-                exp = new RegExp('*[A-Z]*')
+                exp = /^[\d]{16}\s[01][\d]\/[\d]{2}\s[\d]{3}$/
                 return exp.test(cad)
             }
            
             function validarLongitud(cad){
-                exp = new RegExp('*[A-Z]*')
+                exp = /^.{8,}$/
                 return exp.test(cad)
             }
             
             function validarNumero(cad){
-                exp = new RegExp('*[A-Z]+*')
+                exp = /\d/
                 return exp.test(cad)
             }
         </script>
