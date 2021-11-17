@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>
+        </title>
+        <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+        <link rel="stylesheet" media="screen" type="text/css" href="" >
+    </head>
+    <body>
+        <p id = "info"></p>
+        <button id = "borrar">Cerrar Sesion</button>
+        <script>
+            cookies = document.cookie
+            if(!cookies){
+                entrada = prompt('Digame su usuario')
+                document.cookie = "usuario="+entrada+"; max-age="+300
+                cookies = document.cookie
+            }
+            cookies = cookies.split('=')
+            document.getElementById('info').innerHTML="Bienvenido " + cookies[1]
+
+            document.getElementById('borrar'),addEventListener("click",()=>{document.cookies="usuario=; max-age=0"})
+
+            function cocinaCookies(masa){
+                masa = masa.split(';')
+                resul = []
+                for (c of masa){
+                    resul.push(c.split('='))
+                }
+                return resul
+            }
+        </script>
+    </body>
+</html>
