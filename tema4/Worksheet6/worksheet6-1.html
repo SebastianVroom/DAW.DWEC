@@ -8,38 +8,61 @@
     </head>
     <body>
         <p id = "info"></p>
-        <button id='crear'>Crear</button>
-        <button id="borrar">Cerrar Sesion</button>
+        <button id='crearusu'>Crear Sesion</button>
+        <button id="borrarusu">Cerrar Sesion</button><br>
+    <!--<button id='crearp'>Color parrafo</button>
+        <button id="borrarp">Eliminar</button><br>
+        <button id='creartam'>Tamaño letra</button>
+        <button id="borrartam">Eliminar</button><br>
+        <button id='crearcol'>Color fondo</button>
+        <button id="borrarcol">Eliminar</button>-->
         <script>
-            cookies =  document.cookie
-                if (cookies){
-                    cookies = cocinaCookies(cookies)
-                    document.getElementById('info').innerHTML="Bienvenido " + cookies[0][1]
-                }else{
-                    document.getElementById('info').innerHTML="No hay sesion"
-                }
+            var cookies
+            update()
 
-            document.getElementById('borrar'),addEventListener('click',borrarcookies)
-            document.getElementById('crear').addEventListener('click',crearcookie)
+            document.getElementById('crearusu').addEventListener('click',(e)=>crearcookie(e,'usuario'))
+            document.getElementById('borrarusu'),addEventListener('click',(e)=>borrarcookies(e,'usuario'))
+            /*document.getElementById('crearp').addEventListener('click',(e)=>crearcookie(e,'colp'))
+            document.getElementById('borrarp'),addEventListener('click',(e)=>borrarcookies(e,'colp'))
+            document.getElementById('creartam').addEventListener('click',(e)=>crearcookie(e,'taml'))
+            document.getElementById('borrartam'),addEventListener('click',(e)=>borrarcookies(e,'taml'))
+            document.getElementById('crearcol').addEventListener('click',(e)=>crearcookie(e,'colb'))
+            document.getElementById('borrarcol'),addEventListener('click',(e)=>borrarcookies(e,'colb'))*/
 
-            function crearcookie(){
-                let entrada = toString(prompt('Digame su usuario'))
-                document.cookie = "usuario="+encodeURIComponent(entrada)+"; max-age=300"
-                reload()
+            function crearcookie(event,tema){
+                event.stopPropagation()
+                let entrada = window.prompt('Digame su usuario')
+                document.cookie = tema.toString()+"="+encodeURIComponent(entrada)+"; max-age=300"
+                update()
             }
 
-            function borrarcookies(){
-                document.cookie="usuario=; max-age=0"
-                reload()
+            function borrarcookies(event,tema){
+                event.stopPropagation()
+                document.cookie=tema + "=; max-age=0"
+                update()
             }
             
             function cocinaCookies(masa){
                 masa = masa.split(';')
-                let resul = []
-                for (c of masa){
-                    resul.push(c.split('='))
+                let resul = {}
+                for (let c of masa){
+                    c = c.split('=')
+                    resul[c[0]] = c[1]
                 }
                 return resul
+            }
+            
+            function update(){
+                cookies =  document.cookie
+                if (cookies){
+                    cookies = cocinaCookies(cookies)
+                    document.getElementById('info').innerHTML=(cookies['usuario'])?"Bienvenido " + cookies['usuario']:"No hay sesion"
+                    /*document.getElementById('info').style.backgroundColor=(cookies['colp'])?cookies['colp']:'white'
+                    document.body.style.backgroundColor=(cookies['colb'])?cookies['colb']:'white'
+                    document.body.style.fontSize=(cookies['taml'])?cookies['taml']:'24px'*/
+                }else{
+                    document.getElementById('info').innerHTML="No hay sesion"
+                }
             }
         </script>
     </body>
