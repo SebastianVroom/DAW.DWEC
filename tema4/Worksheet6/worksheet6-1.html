@@ -8,22 +8,34 @@
     </head>
     <body>
         <p id = "info"></p>
-        <button id = "borrar">Cerrar Sesion</button>
+        <button id='crear'>Crear</button>
+        <button id="borrar">Cerrar Sesion</button>
         <script>
-            cookies = document.cookie
-            if(!cookies){
-                entrada = prompt('Digame su usuario')
-                document.cookie = "usuario="+entrada+"; max-age="+300
-                cookies = document.cookie
+            cookies =  document.cookie
+                if (cookies){
+                    cookies = cocinaCookies(cookies)
+                    document.getElementById('info').innerHTML="Bienvenido " + cookies[0][1]
+                }else{
+                    document.getElementById('info').innerHTML="No hay sesion"
+                }
+
+            document.getElementById('borrar'),addEventListener('click',borrarcookies)
+            document.getElementById('crear').addEventListener('click',crearcookie)
+
+            function crearcookie(){
+                let entrada = toString(prompt('Digame su usuario'))
+                document.cookie = "usuario="+encodeURIComponent(entrada)+"; max-age=300"
+                reload()
             }
-            cookies = cookies.split('=')
-            document.getElementById('info').innerHTML="Bienvenido " + cookies[1]
 
-            document.getElementById('borrar'),addEventListener("click",()=>{document.cookies="usuario=; max-age=0"})
-
+            function borrarcookies(){
+                document.cookie="usuario=; max-age=0"
+                reload()
+            }
+            
             function cocinaCookies(masa){
                 masa = masa.split(';')
-                resul = []
+                let resul = []
                 for (c of masa){
                     resul.push(c.split('='))
                 }
