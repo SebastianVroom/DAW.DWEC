@@ -10,9 +10,9 @@
         <p id = "info"></p>
         <button id='crearusu'>Crear Sesion</button>
         <button id="borrarusu">Cerrar Sesion</button><br>
-    <!--<button id='crearp'>Color parrafo</button>
+        <button id='crearp'>Color parrafo</button>
         <button id="borrarp">Eliminar</button><br>
-        <button id='creartam'>Tamaño letra</button>
+    <!--<button id='creartam'>Tamaño letra</button>
         <button id="borrartam">Eliminar</button><br>
         <button id='crearcol'>Color fondo</button>
         <button id="borrarcol">Eliminar</button>-->
@@ -20,18 +20,18 @@
             var cookies
             update()
 
-            document.getElementById('crearusu').addEventListener('click',(e)=>crearcookie(e,'usuario'))
+            document.getElementById('crearusu').addEventListener('click',(e)=>crearcookie(e,'usuario','Deme un usuario'))
             document.getElementById('borrarusu'),addEventListener('click',(e)=>borrarcookies(e,'usuario'))
-            /*document.getElementById('crearp').addEventListener('click',(e)=>crearcookie(e,'colp'))
+            document.getElementById('crearp').addEventListener('click',(e)=>crearcookie(e,'colp','color de parrafo'))
             document.getElementById('borrarp'),addEventListener('click',(e)=>borrarcookies(e,'colp'))
-            document.getElementById('creartam').addEventListener('click',(e)=>crearcookie(e,'taml'))
+            /*document.getElementById('creartam').addEventListener('click',(e)=>crearcookie(e,'taml'))
             document.getElementById('borrartam'),addEventListener('click',(e)=>borrarcookies(e,'taml'))
             document.getElementById('crearcol').addEventListener('click',(e)=>crearcookie(e,'colb'))
             document.getElementById('borrarcol'),addEventListener('click',(e)=>borrarcookies(e,'colb'))*/
 
-            function crearcookie(event,tema){
+            function crearcookie(event,tema,msg){
                 event.stopPropagation()
-                let entrada = window.prompt('Digame su usuario')
+                let entrada = window.prompt(msg)
                 document.cookie = tema.toString()+"="+encodeURIComponent(entrada)+"; max-age=300"
                 update()
             }
@@ -46,6 +46,7 @@
                 masa = masa.split(';')
                 let resul = {}
                 for (let c of masa){
+                    c=c.trim()
                     c = c.split('=')
                     resul[c[0]] = c[1]
                 }
@@ -56,12 +57,7 @@
                 cookies =  document.cookie
                 if (cookies){
                     cookies = cocinaCookies(cookies)
-                    document.getElementById('info').innerHTML=(cookies['usuario'])?"Bienvenido " + cookies['usuario']:"No hay sesion"
-                    /*document.getElementById('info').style.backgroundColor=(cookies['colp'])?cookies['colp']:'white'
-                    document.body.style.backgroundColor=(cookies['colb'])?cookies['colb']:'white'
-                    document.body.style.fontSize=(cookies['taml'])?cookies['taml']:'24px'*/
-                }else{
-                    document.getElementById('info').innerHTML="No hay sesion"
+                    
                 }
             }
         </script>

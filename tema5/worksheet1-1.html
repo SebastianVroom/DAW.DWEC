@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>
+        </title>
+        <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+        <link rel="stylesheet" media="screen" type="text/css" href="" >
+        <script src=""></script>
+    </head>
+    <body>
+        <p>
+            <a href="https://www.google.es/">Google</a>
+        </p>
+        <p></p>
+        <p>
+            <a href="https://elpais.com/">el pais</a>
+            <a href="https://www.youtube.com/">Youtube</a>
+        </p>
+        <script>
+            let as = document.getElementsByTagName('a')
+            console.log(as.length)
+            console.log(as[as.length - 1].getAttribute('href'))
+            var cont = 0
+            for (a of as){
+                if(a.getAttribute('href').includes('google')){
+                    cont ++
+                }
+            }
+            console.log(cont)
+            let conte = document.getElementsByTagName('p')[2].children
+            console.log(conte.length)
+        </script>
+    </body>
+</html>
