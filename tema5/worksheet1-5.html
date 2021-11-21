@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>worksheet 1-5
+        </title>
+        <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+        <link rel="stylesheet" media="screen" type="text/css" href="" >
+    </head>
+    <body>
+        <form id='form'>
+            <input type="file"><br>
+            <button id='but'>Subir otro fichero</button>
+            <input type='submit'>
+        </form>
+        <script>
+            document.getElementById('but').addEventListener('click',addf)
+
+            function addf(e){
+                e.preventDefault()
+                obj = document.createElement('input');
+                obj.setAttribute('type','file');
+                document.getElementById('form').insertBefore(obj,this);
+                document.getElementById('form').insertBefore(document.createElement('br'),this);
+            };
+        </script>
+    </body>
+</html>

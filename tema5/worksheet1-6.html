@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>worksheet 1-6
+        </title>
+        <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+        <link rel="stylesheet" media="screen" type="text/css" href="" >
+    </head>
+    <body>
+        <img id = '1' src="dados/dado1.jpeg">
+        <img id = '2' style='display: none;' src="dados/dado2.jpeg">
+        <img id = '3' style='display: none;' src="dados/dado3.jpeg">
+        <img id = '4' style='display: none;' src="dados/dado4.jpeg">
+        <img id = '5' style='display: none;' src="dados/dado5.jpeg">
+        <img id = '6' style='display: none;' src="dados/dado6.jpeg">
+        <button id='prev'>Prev</button>
+        <button id='next'>Next</button>
+        <script>
+            var pos = 1
+
+            function cambimg(pas){
+                if(pos + pas >= 1 && pos + pas <=6){
+                    document.getElementById(pos).style.display='none'
+                    pos += pas
+                    document.getElementById(pos).style.display='block'
+                }
+            }
+
+            document.getElementById('next').addEventListener('click',()=>cambimg(1))            
+            document.getElementById('prev').addEventListener('click',()=>cambimg(-1))
+        </script>
+    </body>
+</html>

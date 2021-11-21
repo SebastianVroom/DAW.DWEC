@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>worksheet 1-4
+        </title>
+        <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+        <link rel="stylesheet" media="screen" type="text/css" href="" >
+        <script src=""></script>
+    </head>
+    <body>
+        <button id='but'>Añadir parrafo</button>
+        <script>
+            function adp(){
+                let obj = document.createElement('p')
+                obj.innerHTML = 'Nuevo parrafo, random id = ' + Math.random()
+                document.body.appendChild(obj)
+            }
+
+            document.getElementById('but').addEventListener('click',adp)
+        </script>
+    </body>
+</html>
