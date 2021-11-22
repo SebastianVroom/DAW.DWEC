@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>
+        </title>
+        <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+        <link rel="stylesheet" media="screen" type="text/css" href="" >
+        <script src=""></script>
+        <style>
+            table{
+                border-collapse: collapse;
+            }
+            td,th{
+                border:1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            class BookList{
+                constructor(){
+                    this.bookArr = []
+                    this.bookReadArr = []
+                    this.bookUnreadArr = []
+                    this.currBook = undefined
+                    this.lastBook = undefined
+                    this.nextBook = undefined
+                }
+                add(book){
+                    this.bookArr.push(book)
+                    if (book.read){
+                        this.bookReadArr.push(book)
+                    }else{
+                        this.bookUnreadArr.push(book)
+                    }
+                }
+                finishCurrentBook(){
+                    this.currBook.read = true
+                    this.currBook.readdate = new Date(Date.now())
+                    this.bookUnreadArr.splice(this.bookUnreadArr.indexOf(this.currBook),1)
+                    this.bookReadArr.push(this.currBook)
+                    this.lastBook = this.currBook
+                    this.currBook = this.nextBook
+                    this.nextBook = this.bookUnreadArr[0]
+                }
+                sortbooks(){
+                    this.bookReadArr = []
+                    this.bookUnreadArr = []
+                    for(b of this.bookArr){
+                        if (b.read){
+                            this.bookReadArr.push(b)
+                        }else{
+                            this.bookUnreadArr.push(b)
+                        }
+                    }
+                }
+            }
+    
+            class Book{
+                constructor(title,genre,author,read = false,readdate = undefined){
+                    this.title = title
+                    this.genre = genre
+                    this.author = author
+                    this.read = read
+                    this.readdate = readdate
+                }
+            }
+        </script>
+        <form>
+            <input id='tit' placeholder="Titulo">
+            <input id='aut' placeholder="Autor">
+            <input id='gen' placeholder="Genero">
+            <button id='badd'>Añadir libro</button>
+        </form>
+        
+        <table id='libs'>
+            <tr id='cabecera'><th>Titulo</th><th>Autor</th><th>Genero</th><th>Leido</th><th>fecha leido</th></tr>
+        </table>
+        <script>
+            function but(e){
+                e.preventDefault()
+                let vals = [document.getElementById('tit').value, document.getElementById('aut').value, document.getElementById('gen').value]
+                document.getElementById('tit').value=''
+                document.getElementById('aut').value=''
+                document.getElementById('gen').value=''
+                if(vals.some((e)=>e == '')){
+                    window.alert('faltan campos')
+                }else{
+                    nueFil = document.createElement('tr')
+                    nueFil.innerHTML=`<td>${vals[0]}</td><td>${vals[1]}</td><td>${vals[2]}</td>`
+                    document.getElementById('libs').appendChild(nueFil)
+                }
+            }
+
+            function crearLib(e){
+                e.preventDefault()
+                let vals = [document.getElementById('tit').value, document.getElementById('aut').value, document.getElementById('gen').value]
+                document.getElementById('tit').value=''
+                document.getElementById('aut').value=''
+                document.getElementById('gen').value=''
+                if(vals.some((e)=>e == '')){
+                    window.alert('faltan campos')
+                }else{
+                    lista.add(new Book(vals[0],vals[1],vals[2]))
+                }
+                update()
+            }
+
+            function update(id=''){
+                if (id === ''){
+                    let table = document.getElementById('libs')
+                    for (b of lista.bookArr){
+                        if(!(table.innerHTML.includes(b.title) && table.innerHTML.includes(b.author))){
+                            fila = document.createElement('tr')
+                            if (b.read){
+                                fila.innerHTML(`<td>${b.title}</td><td>${b.author}</td><td>${b.genre}</td><td>${b.read}</td><td>${b.readdate}</td>`)
+                            }else{
+                                fila.innerHTML(`<td>${b.title}</td><td>${b.author}</td><td>${b.genre}</td><td>${b.read}</td><td>n/a</td>`)
+                            }
+                        }
+                    }
+                }
+            }
+
+            lista = new BookList()
+            document.getElementById('badd').addEventListener('click',but)
+        </script>
+    </body>
+</html>
+    
