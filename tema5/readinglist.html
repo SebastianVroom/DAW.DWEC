@@ -54,6 +54,10 @@
                         }
                     }
                 }
+                findbook(titl,aut){
+                    let libro = this.bookArr.filter((b)=>(b.title == titl) && (b.author == aut))
+                    return libro[0]
+                }
             }
     
             class Book{
@@ -109,21 +113,50 @@
             function update(id=''){
                 if (id === ''){
                     let table = document.getElementById('libs')
-                    for (b of lista.bookArr){
-                        if(!(table.innerHTML.includes(b.title) && table.innerHTML.includes(b.author))){
-                            fila = document.createElement('tr')
+                    let filas = []
+                    for (let f of table.children[0].children){
+                        if (f.id != 'cabecera'){
+                            filas.push(f)
+                        }
+                    }                    
+                    filas.map((e)=>e.remove())
+                    for (let b of lista.bookArr){
+                        let lib = document.createElement('tr')
+                        if (b.read){
+                            lib.innerHTML=`<td>${b.title}</td><td>${b.author}</td><td>${b.genre}</td><td>${b.read}</td><td>${b.readdate}</td>`
+                        }else{
+                            lib.innerHTML=`<td>${b.title}</td><td>${b.author}</td><td>${b.genre}</td><td>${b.read}</td><td>n/a</td>`
+                        }
+                        lib.id = `${b.title}/${b.author}`
+                        lib.addEventListener('click',marcleido)
+                        table.children[0].appendChild(lib)
+                    }
+                }else{
+                    let table = document.getElementById('libs')
+                    for (let f of table.children[0].children){
+                        if (f.id == id){
+                            let b = lista.findbook(...f.id.split('/'))
                             if (b.read){
-                                fila.innerHTML(`<td>${b.title}</td><td>${b.author}</td><td>${b.genre}</td><td>${b.read}</td><td>${b.readdate}</td>`)
+                                f.innerHTML=`<td>${b.title}</td><td>${b.author}</td><td>${b.genre}</td><td>${b.read}</td><td>${b.readdate}</td>`
                             }else{
-                                fila.innerHTML(`<td>${b.title}</td><td>${b.author}</td><td>${b.genre}</td><td>${b.read}</td><td>n/a</td>`)
+                                f.innerHTML=`<td>${b.title}</td><td>${b.author}</td><td>${b.genre}</td><td>${b.read}</td><td>n/a</td>`
                             }
                         }
                     }
                 }
             }
+            
+            function marcleido(e){
+                let lib = this.id
+                let ids = lib.split('/')
+                let b = lista.findbook(...ids)
+                b.read = true
+                b.readdate =  new Date(Date.now())
+                update(lib)
+            }
 
             lista = new BookList()
-            document.getElementById('badd').addEventListener('click',but)
+            document.getElementById('badd').addEventListener('click',crearLib)
         </script>
     </body>
 </html>
