@@ -52,15 +52,22 @@ class PiePapTij{
                 return 0
             }else if (this.jugs[0].mano == 'tijera' && this.jugs[1].mano == 'piedra'){
                 this.punt.push([this.idronda,1])
-                return 0
+                return 1
             }else{
+                this.punt.push([this.idronda,-1])
                 return -1
             }
         }
     }
 
     puntuaciones(){
-        return this.punt.reduce((acu, el)=>acu[el[1]]++,[0,0])
+        let resul = [0,0]
+        for (let e of this.punt){
+            if (e[1] >= 0){
+                resul[e[1]]++
+            }
+        }
+        return resul
     }
 }
 export{PiePapTij}
