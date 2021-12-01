@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>
+        </title>
+        <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+        <link rel="stylesheet" media="screen" type="text/css" href="" >
+        <script src=""></script>
+    </head>
+    <body>
+        <svg id='panel' height='600px' width='100%' style='border: 1px solid black;'></svg>
+        <script>
+            function aleatorio(min, max) {
+                return Math.floor(Math.random() * (max - min)) + min;
+            }
+
+            function colorAleatorio(){
+                return "#"+ Math.floor(Math.random()*16777215).toString(16);
+            }
+            
+            class Bola{
+                constructor(cx,cy,movx,movy,rad){
+                    this.cx = cx
+                    this.cy = cy
+                    this.movx = movx
+                    this.movy = movy
+                    this.rad = rad
+                    this.futx = this.cx + this.movx
+                    this.futy = this.cy + this.movy
+                }
+                chck(limitex,limitey){
+                    limitex = limitex - this.rad
+                    limitey = limitey - this.rad
+
+                    if (this.futx > limitex){
+                        this.futx = this.futx - (2 * (this.futx - limitex))
+                        this.movx = this.movx * -1
+                    }else if(this.futx < this.rad){
+                        this.futx = this.futx - (2 * (this.futx - this.rad))
+                        this.movx = this.movx * -1
+                    }
+                    
+                    if (this.futy > limitey){
+                        this.futy = this.futy - (2 * (this.futy - limitey))
+                        this.movy = this.movy * -1
+                    }else if(this.futy < this.rad){
+                        this.futy = this.futy - (2 * (this.futy - this.rad))
+                        this.movy = this.movy * -1
+                    }
+                }
+                colision(otrbol){
+                    let vectorinterx = this.futx - otrbol.logica.futx
+                    let vectorintery = this.futy - otrbol.logica.futy
+                    if(Math.hypot(vectorinterx,vectorintery) <= (this.rad + otrbol.logica.rad)){
+                        this.futx = this.futx + otrbol.logica.movx
+                        this.futy = this.futy + otrbol.logica.movy
+                        otrbol.logica.futx = otrbol.logica.futx + this.movx
+                        otrbol.logica.futy = otrbol.logica.futy + this.movy
+                        let prov = otrbol.logica.movx
+                        otrbol.logica.movx = this.movx
+                        this.movx = prov
+                        prov = otrbol.logica.movy
+                        otrbol.logica.movy = this.movy
+                        this.movy = prov
+                    }
+                }
+                mueve(){
+                    this.cx = this.futx
+                    this.cy = this.futy
+                    this.futx = this.cx + this.movx
+                    this.futy = this.cy + this.movy
+                }
+            }
+
+            class IntefazBola{
+                constructor(svg,colr,cx,cy,movx,movy,rad){
+                    this.contenedor = svg
+                    this.colr = colr
+                    this.logica = new Bola(cx,cy,movx,movy,rad)
+                    this.aspecto = document.createElementNS("http://www.w3.org/2000/svg","circle");
+                    this.aspecto.setAttributeNS(null, "fill", this.colr);
+                    this.aspecto.setAttributeNS(null, "cx", this.logica.cx);
+                    this.aspecto.setAttributeNS(null, "cy", this.logica.cy);
+                    this.aspecto.setAttributeNS(null, "r", this.logica.rad);
+                    this.contenedor.appendChild(this.aspecto);
+                }
+                mueve(contenedorx,contenedory){
+                    this.logica.chck(contenedorx,contenedory)
+                    this.logica.mueve()
+                    this.dibuja()
+                }
+                dibuja(){
+                    this.aspecto.setAttributeNS(null, "cx", this.logica.cx);
+                    this.aspecto.setAttributeNS(null, "cy", this.logica.cy);
+                }
+            }
+
+            class InterfazPala{
+                constructor(svg,colr,x,y,w,h){
+                    this.contenedor = svg
+                    this.colr = colr
+                    this.logica = new Pala(x,y,w,h)
+                    this.aspecto = document.createElementNS("http://www.w3.org/2000/svg","rect");
+                    this.aspecto.setAttributeNS(null, "fill", this.colr);
+                    this.aspecto.setAttributeNS(null, "x", this.logica.x);
+                    this.aspecto.setAttributeNS(null, "y", this.logica.y);
+                    this.aspecto.setAttributeNS(null, "width", this.logica.w);
+                    this.aspecto.setAttributeNS(null, "height", this.logica.h);
+                    this.contenedor.appendChild(this.aspecto);
+                }
+                mueve(movy,limite){
+                    this.logica.mover(movy,limite)
+                    this.dibuja()
+                }
+                dibuja(){
+                    this.aspecto.setAttributeNS(null, "x", this.logica.x);
+                    this.aspecto.setAttributeNS(null, "y", this.logica.y);
+                }
+                ajustax(posx){
+                    if (posx =! this.logica.x){
+                        this.logica.x = posx
+                        this.dibuja
+                    }
+                }
+            }
+
+            class Pala{
+                constructor(x,y,w,h){
+                    this.x = x
+                    this.y = y
+                    this.w = w
+                    this.h = h
+                    this.futy = y
+                }
+
+                chck(limite){
+                    this.x = posx
+                    if (this.futy < 0){
+                        this.futy = 0
+                    }else if(this.futy > (limite - this.h)){
+                        this.futy = limite - this.h
+                    }
+                }
+
+                mover(movy,limite){
+                    this.futy = movy + this.futy
+                    this.chck(limite)
+                    this.y = this.futy
+                }
+            }
+
+            var bola
+            var palas
+
+            window.addEventListener('load',()=>{
+                let svg = document.getElementById('panel')
+                let tamanoSVG = document.getElementById('panel').getBoundingClientRect()
+                palas = []
+                palas.push(new InterfazPala(svg,colorAleatorio(),50,80,10,100))
+                palas.push(new InterfazPala(svg,colorAleatorio(),tamanoSVG.width - 50,80,10,100))
+                bola = new IntefazBola(svg,colorAleatorio(),tamanoSVG.width/2,tamanoSVG.height/2,15,15,15)
+                window.addEventListener('keydown',tecla)
+                window.requestAnimationFrame(bucle);
+            })
+
+            function tecla(e){
+                let tamanoSVG = document.getElementById('panel').getBoundingClientRect()
+                if (e.key == 's' || e.key == 'S'){
+                    palas[0].mueve(10,tamanoSVG.height)
+                }
+                if (e.key == 'w' || e.key == 'W'){
+                    palas[0].mueve(-10,tamanoSVG.height)
+                }
+                if (e.key == 'ArrowDown'){
+                    palas[1].mueve(10,tamanoSVG.height)
+                }
+                if (e.key == 'ArrowUp'){
+                    palas[1].mueve(-10,tamanoSVG.height)
+                }
+            }
+
+            function bucle(){
+                let tamanoSVG = document.getElementById('panel').getBoundingClientRect();
+                bola.logica.chck(tamanoSVG.width, tamanoSVG.height);
+                bola.logica.mueve();
+                bola.dibuja()
+                window.requestAnimationFrame(bucle)
+            }
+        </script>
+    </body>
+</html>

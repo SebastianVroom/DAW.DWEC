@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>
+        </title>
+        <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+        <link rel="stylesheet" media="screen" type="text/css" href="" >
+        <script src=""></script>
+    </head>
+    <body>
+        <svg id='panel' height='600px' width='100%' style='border: 1px solid black;'></svg>
+        <script>
+            function aleatorio(min, max) {
+                return Math.floor(Math.random() * (max - min)) + min;
+            }
+
+            function colorAleatorio(){
+                return "#"+ Math.floor(Math.random()*16777215).toString(16);
+            }
+            
+            class Bola{
+                constructor(cx,cy,movx,movy,rad){
+                    this.cx = cx
+                    this.cy = cy
+                    this.movx = movx
+                    this.movy = movy
+                    this.rad = rad
+                    this.futx = this.cx + this.movx
+                    this.futy = this.cy + this.movy
+                }
+                chck(limitex,limitey){
+                    limitex = limitex - this.rad
+                    limitey = limitey - this.rad
+
+                    if (this.futx > limitex){
+                        this.futx = this.futx - (2 * (this.futx - limitex))
+                        this.movx = this.movx * -1
+                    }else if(this.futx < this.rad){
+                        this.futx = this.futx - (2 * (this.futx - this.rad))
+                        this.movx = this.movx * -1
+                    }
+                    
+                    if (this.futy > limitey){
+                        this.futy = this.futy - (2 * (this.futy - limitey))
+                        this.movy = this.movy * -1
+                    }else if(this.futy < this.rad){
+                        this.futy = this.futy - (2 * (this.futy - this.rad))
+                        this.movy = this.movy * -1
+                    }
+                }
+                colision(otrbol){
+                    let vectorinterx = this.futx - otrbol.logica.futx
+                    let vectorintery = this.futy - otrbol.logica.futy
+                    if(Math.hypot(vectorinterx,vectorintery) <= (this.rad + otrbol.logica.rad)){
+                        this.futx = this.futx + otrbol.logica.movx
+                        this.futy = this.futy + otrbol.logica.movy
+                        otrbol.logica.futx = otrbol.logica.futx + this.movx
+                        otrbol.logica.futy = otrbol.logica.futy + this.movy
+                        let prov = otrbol.logica.movx
+                        otrbol.logica.movx = this.movx
+                        this.movx = prov
+                        prov = otrbol.logica.movy
+                        otrbol.logica.movy = this.movy
+                        this.movy = prov
+                    }
+                }
+                mueve(){
+                    this.cx = this.futx
+                    this.cy = this.futy
+                    this.futx = this.cx + this.movx
+                    this.futy = this.cy + this.movy
+                }
+            }
+
+            class IntefazBola{
+                constructor(svg,colr,cx,cy,movx,movy,rad){
+                    this.contenedor = svg
+                    this.colr = colr
+                    this.logica = new Bola(cx,cy,movx,movy,rad)
+                    this.aspecto = document.createElementNS("http://www.w3.org/2000/svg","circle");
+                    this.aspecto.setAttributeNS(null, "fill", this.colr);
+                    this.aspecto.setAttributeNS(null, "cx", this.logica.cx);
+                    this.aspecto.setAttributeNS(null, "cy", this.logica.cy);
+                    this.aspecto.setAttributeNS(null, "r", this.logica.rad);
+                    this.contenedor.appendChild(this.aspecto);
+                }
+                mueve(contenedorx,contenedory){
+                    this.logica.chck(contenedorx,contenedory)
+                    this.logica.mueve()
+                    this.dibuja()
+                }
+                dibuja(){
+                    this.aspecto.setAttributeNS(null, "cx", this.logica.cx);
+                    this.aspecto.setAttributeNS(null, "cy", this.logica.cy);
+                }
+            }
+
+            window.addEventListener('load',()=>{
+                bolas =[] 
+                for(let i=0;i < 20;i++){
+                    bolas.push(new IntefazBola(document.getElementById('panel'),colorAleatorio(),aleatorio(20,300),aleatorio(20,300),aleatorio(5,15),aleatorio(5,15),aleatorio(3,40)))
+                }
+                window.requestAnimationFrame(bucle);
+            })
+            function bucle(){
+                let tamanoSVG = document.getElementById('panel').getBoundingClientRect();
+                for(let b of bolas){
+                    for (obs of bolas){
+                        if (b != obs){
+                            b.logica.colision(obs)
+                        }
+                    }
+                }
+                bolas.map((e)=>{e.logica.chck(tamanoSVG.width, tamanoSVG.height);e.logica.mueve();e.dibuja()})
+                window.requestAnimationFrame(bucle)
+            }
+        </script>
+    </body>
+</html>
