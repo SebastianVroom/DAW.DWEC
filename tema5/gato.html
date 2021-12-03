@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>
+        </title>
+        <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+        <link rel="stylesheet" media="screen" type="text/css" href="" >
+        <script src=""></script>
+        <style>
+            img{width: 300px; height: 200px;}
+        </style>
+    </head>
+    <body>
+        <img src='https://ichef.bbci.co.uk/news/800/cpsprodpb/10E9B/production/_109757296_gettyimages-1128004359.jpg'>
+        <img src='https://estaticos.muyinteresante.es/media/cache/1140x_thumb/uploads/images/gallery/59c4f5655bafe82c692a7052/gato-marron_0.jpg'>
+        <img src='https://images.ecestaticos.com/FVdcvD11qPRi-JWDH3USTiXDmeQ=/0x0:2120x1414/1200x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F47b%2F328%2F963%2F47b3289639713b8e80c8d682d219fba7.jpg'>
+        <div id = info></div>
+        <script>
+            class Gato{
+                constructor(elemento, display, id){
+                    this.id = id
+                    this.elemento = elemento
+                    this.elemento.id = this.id
+                    this.clicks = 0
+                    this.info = document.createElement('p')
+                    display.appendChild(this.info)
+                    this.elemento.addEventListener('click',clickgato)
+                }
+            }
+
+            var imgs = document.getElementsByTagName('img')
+            var gatos = []
+            disp = document.getElementById('info')
+            for (let i = 0;i<imgs.length;i++){
+                gatos.push(new Gato(imgs[i],disp,i))
+            }
+
+            function clickgato(e){
+                let obj = gatos[e.target.id]
+                obj.clicks ++
+                obj.info.innerHTML = 'Gato #'+obj.id+': '+obj.clicks
+            }
+        </script>
+    </body>
+</html>
+
