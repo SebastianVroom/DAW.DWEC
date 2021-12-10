@@ -106,6 +106,7 @@
                     window.alert('faltan campos')
                 }else{
                     lista.add(new Book(vals[0],vals[1],vals[2]))
+                    guardarLibro()
                 }
                 update()
             }
@@ -152,10 +153,20 @@
                 let b = lista.findbook(...ids)
                 b.read = true
                 b.readdate =  new Date(Date.now())
+                guardarLibro()
                 update(lib)
             }
 
+            function guardarLibro(){
+                localStorage.setItem("listaLibros",JSON.stringify(lista.bookArr))
+            }
+
             lista = new BookList()
+            if (localStorage.listaLibros){
+                lista.bookArr = JSON.parse(localStorage.listaLibros)
+                update()
+            }
+
             document.getElementById('badd').addEventListener('click',crearLib)
         </script>
     </body>
