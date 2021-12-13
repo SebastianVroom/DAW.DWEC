@@ -1,0 +1,18 @@
+{
+    "bookArr":[
+        {
+            "title":"123",
+            "genre":"asdd",
+            "author":"asdf",
+            "read":false,
+            "readDate":null
+        },
+        {
+            "title":"321",
+            "genre":"asd",
+            "author":"anomalous",
+            "read":false,
+            "readDate":null
+        }
+    ]
+}
