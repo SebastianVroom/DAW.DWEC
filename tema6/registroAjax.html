@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<body>
+    
+    <form>
+        <input id="field" id=username>
+    </form>
+
+    <p id=info></p>
+
+<script>
+var altnames
+
+document.getElementById('field')-addEventListener('keyup',fetchalt)
+
+function fetchalt(e){
+    if (e.target.value.length > 3){
+        loadAltNames(e.target.value)
+    }
+}
+
+function update(){
+    cad=''
+    for (alt of altnames['altposs']){
+        cad = cad+alt+'<br>'
+    }
+    document.getElementById('info').innerHTML=cad
+}
+
+function loadAltNames(cad) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      altnames = JSON.parse(this.responseText);
+      update()
+    }
+  };
+  xhttp.open("GET", "usuario.php?user="+cad, true);
+  xhttp.send();
+}
+</script>
+
+</body>
+</html>
