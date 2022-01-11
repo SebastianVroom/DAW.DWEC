@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Worksheet 1 Ejer 5
+        </title>
+        <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+        <link rel="stylesheet" media="screen" type="text/css" href="" >
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <ol>
+            <li>Tortilla</li>
+            <li>Jamon</li>
+            <li>Queso</li>
+        </ol>
+        <ul>
+            <li>Coca Cola</li>
+            <li>Leche</li>
+            <li>Te</li>
+        </ul>
+        <button>Click</button>
+        <script>
+            $('button').click(function(){$('ol').children('ol>li:first-child').hide()}) 
+        </script>
+    </body>
+</html>

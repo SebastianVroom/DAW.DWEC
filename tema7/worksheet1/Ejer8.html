@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Worksheet 1 Ejer 8
+        </title>
+        <meta charset="UTF-8" http-equiv="content-type" content="text/html">
+        <link rel="stylesheet" media="screen" type="text/css" href="" >
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div><h1>Noticia 1</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas id neque et sapien volutpat
+            molestie a non lacus. Vivamus vitae aliquet purus, in fringilla lorem. Nunc ut sem vitae urna
+            luctus porttitor. Sed et ante vel nisi tempor hendrerit in eget ipsum. Aenean nulla ex, 
+            tempus sed erat vitae, luctus cursus nisl. Nulla dignissim sed tellus ut consectetur. Donec 
+            interdum ligula sit amet lectus pharetra laoreet.</p>
+        </div>
+        <div><h1>Noticia 2</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse euismod tincidunt dui,
+            vitae consectetur orci placerat a. Morbi accumsan augue vitae efficitur eleifend. In hac 
+            habitasse platea dictumst. Aenean dictum arcu id maximus pretium. Etiam aliquet aliquet 
+            cursus. Quisque eget ante et neque convallis pharetra nec efficitur velit. Nunc sed vehicula 
+            arcu. Pellentesque blandit justo dictum, sagittis erat accumsan, sagittis justo. Ut nunc sem, 
+            eleifend non dapibus vel, laoreet sed mi.</p>
+        </div>
+        <div><h1>Noticia 3</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at luctus urna, nec volutpat 
+            metus. Etiam nulla sem, sodales nec faucibus vel, feugiat non urna. Curabitur congue quam 
+            vitae ipsum suscipit ornare. Curabitur viverra turpis eget nisi dignissim, in scelerisque 
+            elit hendrerit. Nam augue nulla, auctor nec pulvinar eget, blandit vitae urna. Proin eleifend 
+            tristique facilisis. Phasellus porttitor dolor iaculis, porttitor leo eu, lacinia velit. 
+            Aenean vel nunc tempus lectus posuere lobortis et non enim.</p>
+        </div>
+        <button id = '1'>Click</button>
+        <button id = '2'>Click</button>
+        <button id = '3'>Click</button>
+        <script>
+            $('#1').click(function(){$('p').css({fontSize: 15})})
+            $('#2').click(function(){$('p').css({fontSize: 20})})
+            $('#3').click(function(){$('p').css({fontSize: 30})})
+            $('h1').click(function(){$(this).siblings(0).toggle()})
+            $('p').on({
+                mouseenter:function(){
+                    $(this).css("color", "red")
+                },
+                mouseleave:function(){
+                    $(this).css("color", "black")
+                }
+            })
+        </script>
+    </body>
+</html>
