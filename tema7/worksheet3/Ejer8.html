@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title>Worksheet 3 Ejer 7
+        <title>Worksheet 3 Ejer 8
         </title>
         <meta charset="UTF-8" http-equiv="content-type" content="text/html">
         <link rel="stylesheet" media="screen" type="text/css" href="" >
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <style>
-            .objetivo{background-color: black;height: 300px;width: 500px;}
+            .objetivo{background-color: black;height: 100px;width: 100px;display: none;}
         </style>
     </head>
     <body>
         <button id='anim'>Empezar</button>
-        <button id='desa'>Parar</button>
+        <div class='objetivo'></div>
+        <div class='objetivo'></div>
+        <div class='objetivo'></div>
+        <div class='objetivo'></div>
         <div class='objetivo'></div>
         <script>
             $('#anim').click(function(){
-                $('.objetivo').hide(15000).show(1500).fadeOut(1000).fadeIn(10000)
-        })
-        $('#desa').click(function(){
-                $('.objetivo').stop(true)
+                $($('.objetivo')[0]).fadeIn('slow')
+                $($('.objetivo')[1]).fadeIn('fast')
+                $($('.objetivo')[2]).fadeIn(800)
+                $($('.objetivo')[3]).fadeIn(2000)
+                $($('.objetivo')[4]).fadeIn(4000)
         })
         </script>
     </body>
